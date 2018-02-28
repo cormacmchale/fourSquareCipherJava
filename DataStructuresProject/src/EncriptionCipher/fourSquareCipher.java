@@ -13,15 +13,16 @@ public class fourSquareCipher {
 public void bigram(char [] text)
 	{
 	   int i;
-	   for (i=0; i < 4; i++)
+	   for (i=0; i < text.length - 1; i++)
 	   {
 		   
 		   char encryptOne = text[i];
 		   char encryptTwo = text[i+1];
-		   encription(encryptOne, encryptTwo);
-		               //testing purposes only
+		               //testing only
 					   //System.out.print(encryptOne);
 					   //System.out.print(encryptTwo);
+		   encription(encryptOne, encryptTwo);
+		               //testing purposes only
 					   //System.out.println("");
 		   i++;
        }//end for loop
@@ -31,52 +32,47 @@ public void bigram(char [] text)
 public void encription(char one, char two)
     {
 	   	int refOne = ((int) one -65);
+	   	if (refOne > 8)
+	   	{
+	   		refOne -=1;
+	   	}
+	   	if(refOne == 9)
+	   	{
+	   		refOne = 8;
+	   	}
 	   	int refTwo = ((int) two -65);
-	   	//testing
-	    System.out.println(one +" "+two);
-	    System.out.println(refOne+" "+refTwo);
-	   	
+	   	if (refTwo > 8)
+	   	{
+	   		refTwo -=1;
+	   	}
+	   	if(refTwo == 9)
+	   	{
+	   		refTwo = 8;
+	   	}
+						   	//testing
+						    //System.out.println(one +" "+two);
+						    //System.out.println(refOne+" "+refTwo);	   	
 	   	//do maths to find second and third refernce
 	   	int pointOne = (refOne/5); 
-	    if(pointOne != 0)
-	    {
-	    	pointOne -=1;
-	    }
 	   	int pointOne1 = refOne%5;
-	   	if(pointOne1 == 0)
-	   	{
-	   		pointOne1 = 5;
-	   	}
-	   	else if (pointOne1 == 5)
-	   	{
-	   		pointOne1 = 0;
-	   	}
-	   	
-	   	
 	   	
 	   	int pointTwo = (refTwo/5);
-
 	   	int pointTwo1 = refTwo%5;
-	   	if(pointTwo1 == 0)
-	   	{
-	   		pointOne1 = 5;
-	   	}
-	   	else if (pointTwo1 == 5)
-	   	{
-	   		pointOne1 = 0;
-	   	}
 	   	
-	   	System.out.println(pointOne+" "+pointOne1);
-	   	System.out.println(pointTwo+" "+pointTwo1);
+					   	//testing only
+					   	//System.out.println(pointOne+" "+pointOne1);
+					   	//System.out.println(pointTwo+" "+pointTwo1);
+	   	
 	   	int findPointOne = (pointOne*5)+(pointTwo1);
 	   	int findPointTwo = (pointTwo*5)+(pointOne1);
+	   					//testing only
+	   					//System.out.println(findPointOne+" "+findPointTwo);
 	   	
-
-	    char three = secondQuadrent[findPointOne-1];
-	    char four = thirdQuadrent[findPointTwo+1];
+	   	char three = secondQuadrent[findPointOne];
+	    char four = thirdQuadrent[findPointTwo];
 	    
 	   	//print these values
-	    System.out.println(three+" "+four);
+	    System.out.print(three+""+four);
 	  
 	   		
 	}//end encription method

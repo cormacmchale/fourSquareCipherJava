@@ -33,7 +33,7 @@ public class parser {
 		String newWords = words.toString();
 		//for (char c: words)
 		
-		newWords = newWords.replaceAll("(?:--|[\\[\\]{}(),.-: +/\\\\])", "").toUpperCase();
+		newWords = newWords.replaceAll("[^a-zA-Z]", "").toUpperCase();
 		
 		encriptionText = newWords.toCharArray();
 
