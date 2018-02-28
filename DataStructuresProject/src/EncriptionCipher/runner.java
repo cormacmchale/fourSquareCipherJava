@@ -1,7 +1,5 @@
 package EncriptionCipher;
 
-import java.io.File;
-
 //main class for running encription
 public class runner {
 
@@ -10,15 +8,19 @@ public class runner {
 	   
 	   final String ENCRIPTION_FILE = "PoblachtNaHEireann.txt";
 	   
-	   //testing that the file will parse correctly
+	   //parse file here
 	   parser test = new parser();
-	   test.parse(ENCRIPTION_FILE);	   
-	   test.testParse();
+	   test.parse(ENCRIPTION_FILE);	  
 	   
-	   System.out.println("");	   
-	   System.out.print(test.encriptionText[22]);
+	   //pass file into cipher for breaking up into encription
+	   fourSquareCipher cipher = new fourSquareCipher();
+	   cipher.bigram(test.encriptionText);
 	   
+	   			   //testing purposes only
+	   			   //test.testParse();	   
+				   //System.out.println("");	   
+				   //System.out.print(test.encriptionText[22]);	   
    }//end main
 
+}//end class
 
-}

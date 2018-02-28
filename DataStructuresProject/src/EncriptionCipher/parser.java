@@ -9,7 +9,7 @@ public class parser {
 	//private variables for getting text correctly
 	//private List<Character> plainText = new ArrayList<Character>();
 	private List<String> words = new ArrayList<String>();
-	public static char encriptionText[];
+	public char encriptionText[];
 	
 	public void parse(String text)
 	{
@@ -31,10 +31,11 @@ public class parser {
 						//throw new Exception("[ERROR] Encountered a problem reading the dictionary. " + e.getMessage());
 					}
 		String newWords = words.toString();
+		//for (char c: words)
 		
-		newWords = newWords.replaceAll("(?:--|[\\[\\]{}(),.: +/\\\\])", "").toUpperCase();
+		newWords = newWords.replaceAll("(?:--|[\\[\\]{}(),.-: +/\\\\])", "").toUpperCase();
 		
-		encriptionText = newWords.toString().toCharArray();
+		encriptionText = newWords.toCharArray();
 
 	}//end parse function
 
