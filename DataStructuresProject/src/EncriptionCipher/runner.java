@@ -6,7 +6,7 @@ public class runner {
    public static void main(String[] args) 
    {
 	   
-	   final String ENCRIPTION_FILE = "PoblachtNaHEireann.txt";
+	   final String ENCRIPTION_FILE = "DeBelloGallico.txt";
 	   
 	   //parse file here
 	   parser test = new parser();
