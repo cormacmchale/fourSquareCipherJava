@@ -1,5 +1,8 @@
 package EncriptionCipher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class fourSquareCipher {
 
 	//starting point
@@ -9,12 +12,13 @@ public class fourSquareCipher {
 	char[] secondQuadrent = "zgptfoihmuwdrcnykeqaxvsbl".toUpperCase().toCharArray();
 	char[] thirdQuadrent = "mfnbdcrhsaxyogvituewlqzkp".toUpperCase().toCharArray();
 
+	List<Character> encryptedText = new ArrayList<Character>();
 
 public void bigram(char [] text)
 	{
        long startTime = System.nanoTime();
 	   int i;
-	   for (i=0; i < text.length - 1; i++)
+	   for (i=0; i < text.length - 1; i+=2)
 	   {
 		   
 		   char encryptOne = text[i];
@@ -25,7 +29,6 @@ public void bigram(char [] text)
 		   encription(encryptOne, encryptTwo);
 		               //testing purposes only
 					   //System.out.println("");
-		   i++;
        }//end for loop
 	    long endTime = System.nanoTime();
 	    System.out.println("That took " + (endTime - startTime) + " nanoSeconds");
@@ -61,9 +64,11 @@ public void encription(char one, char two)
 	   					//System.out.println(findPointOne+" "+findPointTwo);	   	
 	   	char three = secondQuadrent[findPointOne];
 	    char four = thirdQuadrent[findPointTwo];	    
-	   	//print these values
-	    System.out.print(three+""+four);
-	    System.out.println("");
+						   	//print these values
+						    //System.out.print(three+""+four);
+						    //System.out.println("");
+	    encryptedText.add(three);
+	    encryptedText.add(four);
 	}//end encription method
 }
 
