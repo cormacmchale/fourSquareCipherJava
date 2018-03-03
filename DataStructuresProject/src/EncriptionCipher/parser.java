@@ -36,8 +36,9 @@ public class parser {
 		newWords = newWords.replaceAll("[^a-zA-Z]", "").toUpperCase();
 		
 		encriptionText = newWords.toCharArray();
-
+      
 	}//end parse function
+	
 
 	public void testParse()
 	{
