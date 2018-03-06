@@ -7,18 +7,17 @@ import java.io.*;
 public class parser {
 
 	//private variables for getting text correctly
-	//private List<Character> plainText = new ArrayList<Character>();
 	private List<String> words = new ArrayList<String>();
 	public char encriptionText[];
 	
+	//function that takes a string o ftext
 	public void parse(String text)
 	{
 		
 		try {
 				FileInputStream fstream = new FileInputStream(text);
 				DataInputStream in = new DataInputStream(fstream);
-				BufferedReader br = new BufferedReader(new InputStreamReader(in));
-				
+				BufferedReader br = new BufferedReader(new InputStreamReader(in));				
 				String next;
 				while ((next = br.readLine()) != null)   
 				{
@@ -30,16 +29,11 @@ public class parser {
 					{
 						//throw new Exception("[ERROR] Encountered a problem reading the dictionary. " + e.getMessage());
 					}
-		String newWords = words.toString();
-		//for (char c: words)
-		
+		String newWords = words.toString();		
 		newWords = newWords.replaceAll("[^a-zA-Z]", "").toUpperCase();
-		
 		encriptionText = newWords.toCharArray();
       
 	}//end parse function
-	
-
 	public void testParse()
 	{
 		int i;		
