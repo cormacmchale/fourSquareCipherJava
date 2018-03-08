@@ -10,25 +10,24 @@ public class parser {
 	private List<String> words = new ArrayList<String>();
 	public char encriptionText[];
 	
-	//function that takes a string o ftext
+	//function that takes a string of text
 	public void parse(String text)
-	{
-		
+	{		
 		try {
-				FileInputStream fstream = new FileInputStream(text);
-				DataInputStream in = new DataInputStream(fstream);
-				BufferedReader br = new BufferedReader(new InputStreamReader(in));				
-				String next;
-				while ((next = br.readLine()) != null)   
-				{
-				      words.add(next);
-				}
-				in.close();
-		    } 
-		    catch (Exception e) 
-					{
-						//throw new Exception("[ERROR] Encountered a problem reading the dictionary. " + e.getMessage());
-					}
+		FileInputStream fstream = new FileInputStream(text);
+		DataInputStream in = new DataInputStream(fstream);
+		BufferedReader br = new BufferedReader(new InputStreamReader(in));				
+		String next;
+		while ((next = br.readLine()) != null)   
+		{
+		      words.add(next);
+		}
+		in.close();
+            } 
+        catch (Exception e) 
+			{
+				//not sure what to put here!!
+			}
 		String newWords = words.toString();		
 		newWords = newWords.replaceAll("[^a-zA-Z]", "").toUpperCase();
 		encriptionText = newWords.toCharArray();

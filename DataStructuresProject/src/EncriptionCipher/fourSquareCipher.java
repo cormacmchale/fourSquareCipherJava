@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class fourSquareCipher {
-
+	String cipherSquare = "abcdefghiklmnopqrstuvwxyz";
 	//starting point
-	char[] firstQuadrent = "abcdefghiklmnopqrstuvwxyz".toUpperCase().toCharArray();
-	char[] fourthQuadrent = "abcdefghiklmnopqrstuvwxyz".toUpperCase().toCharArray();	
+	char[] firstQuadrent = cipherSquare.toUpperCase().toCharArray();
+	char[] fourthQuadrent = firstQuadrent;
+	
+	
 	//find encription here
 	char[] secondQuadrent = "zgptfoihmuwdrcnykeqaxvsbl".toUpperCase().toCharArray();
 	char[] thirdQuadrent = "mfnbdcrhsaxyogvituewlqzkp".toUpperCase().toCharArray();
