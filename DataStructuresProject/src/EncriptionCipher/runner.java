@@ -1,52 +1,65 @@
 package EncriptionCipher;
 import java.io.*;
+import java.net.URL;
 import java.util.List;
 import java.util.Scanner;
-
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 //main class for running encryption
 public class runner {
 
-   public static void main(String[] args) throws FileNotFoundException{
-	   
+   public static void main(String[] args) throws IOException{
+
 	   menu();
 
    }//end main
 
-
-
-public static void menu() throws FileNotFoundException
+public static void menu() throws IOException
 	{
+      fourSquareCipher cipher = new fourSquareCipher();
 	  Scanner console = new Scanner(System.in);
 	  int choice;
-	  String file;
-	  System.out.print("Please Select an option: 1)Encrypt a File, -1)to finish: ");
+	  String file, url;
+	  System.out.print("Please Select an option:\n  1)Encrypt a File\n  2)Enter a URL for Encryption\n  3)Decrypt a File *you haven't anything to decrypt yet!\n -1)to finish:  ");
 	  choice = console.nextInt();
 	  while(choice!=-1)
 	  {
 		  switch(choice)
 		  {
 				  case 1:
-						  System.out.print("Please Enter the file Name: ");
-						  file = console.next();
-						  parser test = new parser();
-						  test.parse(file);
-						  fourSquareCipher cipher = new fourSquareCipher();
-						  cipher.bigram(test.encriptionText);
+
+					      parser parseFile = new parser();
+					      JFileChooser chooser = new JFileChooser();
+					      FileNameExtensionFilter filter = new FileNameExtensionFilter("text Files", "txt");
+					      chooser.setFileFilter(filter);
+						  int returnVal = chooser.showOpenDialog(null);				    
+						  file = chooser.getSelectedFile().getPath();
+						  parseFile.parse(file);
+						  cipher.bigram(parseFile.encriptionText);
 						  printEncryption(cipher.encryptedText);
-						  System.out.println("Encryption:"+cipher.nanoTime+" nanoSeconds");
+						  System.out.println("Encryption:"+cipher.nanoTime+" nanoSeconds,"+" Please view EncryptionFile.txt to inspect!");
 				  break;
 				  case 2:
-					      parser newTest = new parser();
-						  fourSquareCipher newCipher = new fourSquareCipher();
-						  newTest.parse("EncryptionFile.txt");
-						  newCipher.reverseBigram(newTest.encriptionText);
-						  printDecryption(newCipher.decryptedText);
-						  System.out.println("Decryption:"+newCipher.nanoTime+" nanoSeconds");
+					      System.out.println("Please enter a valid URL: ");
+					      url = console.next();
+					      URL encryptUrl = new URL("https://"+url);
+					      parser urlParse = new parser();
+					      urlParse.parseURL(encryptUrl);
+					      cipher.bigram(urlParse.encriptionText);
+					      printEncryption(cipher.encryptedText);
+						  System.out.println("Encryption:"+cipher.nanoTime+" nanoSeconds,"+" Please view EncryptionFile.txt to inspect!");				      
+				  break;
+				  case 3:
+					      parser newParseFile = new parser();
+						  newParseFile.parse("EncryptionFile.txt");
+						  cipher.reverseBigram(newParseFile.encriptionText);
+						  printDecryption(cipher.decryptedText);
+						  System.out.println("Decryption:"+cipher.nanoTime+" nanoSeconds,"+" Please view DecryptedFile.txt to inspect!");
 				  break;
 				  case -1:
 				  return;			  
 		  }//end switch statement
-		  System.out.print("Please Select an option: 1)Encrypt a File, 2)Decrypt Previously Encrypted File -1)to finish: ");
+		  System.out.print("Please Select an option:\n  1)Encrypt a File\n  2)Enter a URL for Encryption\n  3)Decrypt Previously Encrypted File\n  -1)to finish: ");
 		  choice = console.nextInt();
 	  }//end while loop
 	}//end menu method
@@ -65,6 +78,7 @@ public static void printEncryption(List<Character> print) throws FileNotFoundExc
 		   }//end for loop for printing to file		   
 	   encryptedFile.close();//close file
 	}//end print to file method
+
 public static void printDecryption(List<Character> print) throws FileNotFoundException
 	{
 	   PrintWriter decryptedFile = new PrintWriter("DecryptedFile.txt");

@@ -1,28 +1,43 @@
 package EncriptionCipher;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class fourSquareCipher {
 	String cipherSquare = "abcdefghiklmnopqrstuvwxyz";
 	//starting point
 	char[] firstQuadrent = cipherSquare.toUpperCase().toCharArray();
-	char[] fourthQuadrent = firstQuadrent;
+	char[] fourthQuadrent = firstQuadrent;	
+    char[] secondQuadrent = keyword(firstQuadrent);
+	char[] thirdQuadrent = keyword(firstQuadrent);
 	
-	
-	//find encription here
-	char[] secondQuadrent = "zgptfoihmuwdrcnykeqaxvsbl".toUpperCase().toCharArray();
-	char[] thirdQuadrent = "mfnbdcrhsaxyogvituewlqzkp".toUpperCase().toCharArray();
     //variables for storing the encrypted and then decrypted text
 	//using the list data structure as .add runs in amortized running time 0(N)
 	List<Character> encryptedText = new ArrayList<Character>();
 	List<Character> decryptedText = new ArrayList<Character>();
 	//used to measure encryption and decryption time
 	public long nanoTime;
-	
+
+public char[] keyword(char[] keyword)
+{	 
+	 List<Character> toBeShuffled = new ArrayList<Character>();
+    // ArrayList<Character> key = (ArrayList<Character>) Arrays.asList(keyword);
+     for(int i = 0; i<keyword.length; i++)
+     {
+    	 toBeShuffled.add(keyword[i]);
+     }
+     Collections.shuffle(toBeShuffled);
+     return toBeShuffled.toString().replaceAll("[^a-zA-Z]", "").toUpperCase().toCharArray();
+}
+
+
 //method that breaks the text from the parser object up into bigrams 
 public void bigram(char [] text)
-	{	   
+	{	
+	   encryptedText.clear();
        long startTime = System.nanoTime();//start timer
 	   int i;
 	   //loops through the Character array and feeds the bigrams into encryption method
@@ -44,30 +59,28 @@ public void encription(char one, char two)
    	    //first letter in 
 	   	int refOne = ((int) one -65);
 	   	//second letter in	   	
-	   	int refTwo = ((int) two -65);
-	   	
+	   	int refTwo = ((int) two -65);	   	
 	   	//error handling for the letter J not being in the cipher, j will become i when passed in
-	   	if (refOne > 8){refOne -=1;}
 	   	if(refOne == 9){refOne = 8;}
+	   	if(refTwo == 9){refTwo = 8;}
+	   	//order of these comparisons is important otherwise k will also turn to i before encryption
+	   	if (refOne > 8){refOne -=1;}
 	   	if (refTwo > 8){refTwo -=1;}
-	   	if(refTwo == 9){refTwo = 8;}	   		   	
+	   		   	
 	   	//we can use basic maths to encrypt the bigram
 	   	//this is done by giving imagined two dimensional reference points to each of the first two characters
 	   	//these are aquired by using the / and % operator on the position of each character in the first and fourth array
 	   	int pointOne = (refOne/5); 
 	   	int pointOne1 = refOne%5;	   	
 	   	int pointTwo = (refTwo/5);
-	   	int pointTwo1 = refTwo%5;   	
-	   	
+	   	int pointTwo1 = refTwo%5;   		   	
 	   	//then to find the corners of the square used for encription we use *5 to get where the row refernce would tell us to go 
 	   	//and +pointTwo1 to get from the multiple of 5 to the actual index in the single dimensional arrays
 	   	//making this process 0(1) also
 	   	int findPointOne = (pointOne*5)+(pointTwo1);
-	   	int findPointTwo = (pointTwo*5)+(pointOne1);
-	   	
+	   	int findPointTwo = (pointTwo*5)+(pointOne1);   	
 	   	char three = secondQuadrent[findPointOne];
-	    char four = thirdQuadrent[findPointTwo];	    
-	 
+	    char four = thirdQuadrent[findPointTwo];	    	 
 	    //add them to the list here to print to file later
 	    encryptedText.add(three);
 	    encryptedText.add(four);
@@ -77,6 +90,7 @@ public void encription(char one, char two)
 //the same method as bigram only this feeds bigrams into a reverse encription method
 public void reverseBigram(char [] text)
 	{  
+	   decryptedText.clear();
 	   long startTime = System.nanoTime();
 	   int i;
 	   for (i=0; i < text.length-1; i+=2)

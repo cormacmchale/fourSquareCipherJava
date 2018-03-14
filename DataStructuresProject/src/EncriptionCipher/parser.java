@@ -3,6 +3,7 @@ package EncriptionCipher;
 //imports required to use tools required for reading files 
 import java.util.*;
 import java.io.*;
+import java.net.URL;
 
 public class parser {
 
@@ -13,26 +14,49 @@ public class parser {
 	//function that takes a string of text
 	public void parse(String text)
 	{		
-		try {
+		try 
+		{
 		FileInputStream fstream = new FileInputStream(text);
 		DataInputStream in = new DataInputStream(fstream);
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));				
 		String next;
-		while ((next = br.readLine()) != null)   
-		{
-		      words.add(next);
-		}
-		in.close();
-            } 
-        catch (Exception e) 
+			while ((next = br.readLine()) != null)   
 			{
-				//not sure what to put here!!
+			      words.add(next);
 			}
+		in.close();
+        } 
+        catch (Exception e) 
+	    {
+				//not sure what to put here!!
+		}
 		String newWords = words.toString();		
 		newWords = newWords.replaceAll("[^a-zA-Z]", "").toUpperCase();
 		encriptionText = newWords.toCharArray();
-      
+
 	}//end parse function
+	
+    public void parseURL(URL url) throws IOException
+    {
+		try 
+		{
+		BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+	    String next;
+	        while ((next = in.readLine()) != null)
+	        {
+	        	 words.add(next);
+	        }
+	        in.close();
+		} 
+		catch (IOException e) 
+		{
+             //keeping compiler happy here
+		}
+        
+		String newWords = words.toString();		
+		newWords = newWords.replaceAll("[^a-zA-Z]","").toUpperCase();
+		encriptionText = newWords.toCharArray();
+    }
 	public void testParse()
 	{
 		int i;		
