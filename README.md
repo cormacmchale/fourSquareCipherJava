@@ -11,3 +11,4 @@ i think that a method where... for(inputString.Length)
 
 starting first just by using 4 single arrays to represent the 4 squares, the reason for this is that I think that it will be quicker to search through two single arrays and find the corresponding values in the other arrays
 the big 0 notation on this is o(n) however as with a large input size the program will have to loop many times..
+adding as test
